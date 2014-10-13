@@ -59,7 +59,11 @@ define([
     var replaceTerm = function($el, term) {
         var r =  new RegExp( "\\b(" + pregQuote(term.name.toLowerCase()) + ")\\b" , 'gi' );
 
-        $el.find("p:contains('"+term.name+"')").each( function( i, element ) {
+        var selectors = _.map(['p', 'li'], function(elementName){
+          return elementName + ":contains('"+term.name+"')";
+        });
+
+        $el.find(selectors.join(', ')).each( function( i, element ) {
             element = $(element);
             var content = $(element).html();
 
